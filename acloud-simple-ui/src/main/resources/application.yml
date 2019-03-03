@@ -1,0 +1,9 @@
+server: 
+  port: ${simple.ui.port:8701}
+
+  
+spring:
+  application:
+    name: acloud-simple-ui
+
+simpleServiceName: cloud-simple-service

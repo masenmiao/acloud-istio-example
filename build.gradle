@@ -1,0 +1,111 @@
+buildscript {
+
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url 'https://repo.spring.io/libs-milestone' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        //classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.1'
+        classpath('se.transmode.gradle:gradle-docker:1.2')//这个有冲突，bootRepackage可能找不到
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
+}
+
+
+subprojects {
+    group = "acloud-istio-example"
+    version = version
+
+
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'docker'
+    //apply plugin: 'org.junit.platform.gradle.plugin'
+
+    //startScripts.enabled = false
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url 'https://repo.spring.io/libs-milestone' }
+    }
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    dependencyManagement {
+
+    }
+
+
+
+    dependencies {
+        compileOnly("org.projectlombok:lombok")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("junit:junit:${junitVersion}")
+        /*  junit 5
+            testCompile("org.junit.jupiter:junit-jupiter-api")
+            testRuntime "org.junit.jupiter:junit-jupiter-engine"
+        */
+        testCompile("io.projectreactor:reactor-test")
+    }
+
+    if (name.contains('common') || name.contains('api')) {
+        println 'name:' + name
+
+        jar { enabled = true }
+        bootJar { enabled = false }
+        //mainClassName = ''//must not be null (Key=Start-Class) 找不到启动类
+        //https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/html/
+        //bootRepackage.enabled = false //bootRepackage找不到?
+        //tasks.remove(bootRepackage)
+    } else {
+        task buildDocker(type: Docker, dependsOn: build) {//需要用到docker实例
+//            push = true
+//push 代表会docker push 到远程仓库,我们可以在ci 构建时 ，手动执行docker push，先用执行docker login登录
+//            registry = dockerRegistry
+            applicationName = jar.baseName
+            dockerfile = file('Dockerfile')
+            doFirst {
+                copy {
+                    from jar
+                    into stageDir
+                }
+            }
+        }
+
+    }
+
+}
+
+
+project("acloud-common") {
+    description = "acloud-common"
+
+    dependencies {
+        compile("org.apache.commons:commons-lang3:${commonslang3Version}")
+        compile("org.apache.commons:commons-collections4:${commonscollectionVersion}")
+        compile("org.slf4j:slf4j-api:${slf4jVersion}")
+
+        compile("io.springfox:springfox-swagger-ui:${swagger2Version}")
+        compile("io.springfox:springfox-swagger2:${swagger2Version}")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-webflux")
+        compile("io.github.openfeign:feign-core:${openfeign}")
+        compile("io.github.openfeign:feign-jackson:${openfeign}")
+        compile("io.github.openfeign:feign-reactive-wrappers:${openfeign}")
+
+
+    }
+}
+
+
+
+
+

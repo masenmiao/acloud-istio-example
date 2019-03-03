@@ -1,0 +1,6 @@
+rootProject.name = 'acloud-istio-example'
+include "acloud-common"
+include "acloud-simple-api"
+include "acloud-simple-ui"
+include "acloud-simple-service"
+
