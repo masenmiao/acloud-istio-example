@@ -80,7 +80,7 @@ public class UserController {
 		return user;
 	}
 
-
+	//用这个做多版本路由规则-分拆流量的测试
 	@GetMapping(value="/user")
 	public List<User> searchAll(){
 		System.out.println("message config is:"+messageString);
