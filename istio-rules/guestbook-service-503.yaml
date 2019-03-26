@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: acloud-simple-service
+spec:
+  hosts:
+  - acloud-simple-service
+  http:
+  - route:
+    - destination:
+        host: acloud-simple-service
+    fault:
+      abort:
+        percent: 100
+        httpStatus: 503
+

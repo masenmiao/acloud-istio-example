@@ -40,6 +40,9 @@ spec:
       containers:
       - name: acloud-simple-service
         image: masencloud/acloud-simple-service:1.0
+        env:
+        - name: userServiceVersion
+          value: "2.0"
         livenessProbe:
           initialDelaySeconds: 5
           httpGet:

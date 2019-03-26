@@ -1,0 +1,22 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: acloud-simple-service-rw
+  namespace: default
+spec:
+  rules:
+  - services: ["acloud-simple-service.default.svc.cluster.local"]
+    methods: ["*"]
+---
+apiVersion: rbac.istio.io/v1alpha1
+kind: ServiceRoleBinding
+metadata:
+  name: bind-acloud-simple-service-rw
+  namespace: default
+spec:
+  subjects:
+  - properties:
+      source.principal: cluster.local/ns/default/sa/acloud-simple-service
+  roleRef:
+    kind: ServiceRole
+    name: acloud-simple-service-rw
