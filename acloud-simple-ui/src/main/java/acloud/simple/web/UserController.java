@@ -27,7 +27,7 @@ public class UserController {
     RestTemplate restTemplate;
 
     @Value("${simpleServiceName}")
-    private String simpleServiceName = "cloud-simple-service";
+    private String simpleServiceName = "acloud-simple-service";
 
     /**
      * feign RPC方式调用方式，最佳实践

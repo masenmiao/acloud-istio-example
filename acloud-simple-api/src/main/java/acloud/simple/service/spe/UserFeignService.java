@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  */
 
-//service id : cloud-simple-service
+//service id : acloud-simple-service
 public interface UserFeignService {
 
 	@RequestLine("GET /searchAll")

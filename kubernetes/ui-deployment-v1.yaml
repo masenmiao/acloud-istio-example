@@ -19,39 +19,19 @@ metadata:
   labels:
     app: acloud-simple-ui
     version: "1.0"
-    visualize: "true"
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: acloud-simple-ui
-      version: "1.0"
-      serving: "true"
+  replicas: 1
   template:
     metadata:
       labels:
         app: acloud-simple-ui
         version: "1.0"
-        serving: "true"
-        visualize: "true"
-      annotations:
-        visualizer/uses: acloud-simple-service
     spec:
       containers:
       - name: acloud-simple-ui
-        image: masencloud/acloud-simple-ui:1.0
+        image: acloud-istio-example/acloud-simple-ui:1.0
         env:
         - name: simpleServiceName
-          value: cloud-simple-service
-        livenessProbe:
-          initialDelaySeconds: 60
-          httpGet:
-            path: /actuator/health
-            port: 8080
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
+          value: acloud-simple-service
         ports:
-        - name: http
           containerPort: 8080
