@@ -6,7 +6,7 @@ spec:
   hosts:
   - "*"
   gateways:
-  - -gateway
+  - acloud-simple-gateway
   http:
   - match:
     - uri:

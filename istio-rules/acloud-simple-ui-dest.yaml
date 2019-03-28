@@ -1,9 +1,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: acloud-simple-service
+  name: acloud-simple-ui
 spec:
-  host: acloud-simple-service
+  host: acloud-simple-ui
   trafficPolicy:
     connectionPool:
       tcp:

@@ -6,12 +6,11 @@ spec:
   hosts:
   - "*"
   gateways:
-  - guestbook-gateway
+  - acloud-simple-gateway
   http:
   - match:
     - uri:
         prefix: /
     route:
     - destination:
-        host: acloud-simple-service
-        subset: v1
+        host: acloud-simple-ui
