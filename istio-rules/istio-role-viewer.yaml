@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - services: ["acloud-simple-service.default.svc.cluster.local", "helloworld-service.default.svc.cluster.local", "guestbook-ui.default.svc.cluster.local"]
+  - services: ["acloud-simple-service.default.svc.cluster.local","acloud-simple-ui.default.svc.cluster.local"]
     methods: ["GET", "HEAD"]
 ---
 apiVersion: rbac.istio.io/v1alpha1
