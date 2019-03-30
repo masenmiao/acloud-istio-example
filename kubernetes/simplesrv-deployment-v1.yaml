@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: acloud-simple-service
-        image: acloud-istio-example/acloud-simple-service:1.0
+        image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-service:1.0
         livenessProbe:
           initialDelaySeconds: 5
           httpGet:

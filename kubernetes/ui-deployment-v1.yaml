@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: acloud-simple-ui
-        image: acloud-istio-example/acloud-simple-ui:1.0
+        image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-ui:1.0
         env:
         - name: simpleServiceName
           value: acloud-simple-service
