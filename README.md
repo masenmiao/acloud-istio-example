@@ -1,14 +1,16 @@
 istio官方示例<br/>
 https://istio.io/docs/examples/bookinfo/<br/>
-代码<br/>
+官方示例代码<br/>
 https://github.com/istio/istio/tree/release-0.1/samples/apps/bookinfo/src<br/>
 
 SpringBoot2  istio简单实例：<br/>
 acloud-simple-ui 服务调用方<br/>
 acloud-simple-service 服务提供方<br/>
 
-<!-- Istio承担了注册中心，服务网关，配置中心替换，调用链使用Istio的Jaeger -->
-SpringBoot->gradle 生成docker 镜像(或上传)->kubernetes部署->istio流量规则配置<br/>
+测试步骤：<br/>
+gradle 生成docker 镜像(或上传)->kubernetes部署->istio流量规则配置<br/>
+<!-- Istio承担了注册中心，服务网关，配置中心替换，调用链使用Istio的Jaeger
+
 
 docker 构建：<br/>
 gradle :acloud-simple-ui:buildDocker -info<br/>
@@ -36,4 +38,4 @@ istioctl create -f .\istio-rules\acloud-simple-service-dest.yaml     <br/>
 kubectl apply -f .\kubernetes\simplesrv-deployment-v2.yaml     <br/>
 调整流量配置，如:     <br/>
 istioctl replace -f .\istio-rules\acloud-simple-service-vs-v1.yaml      <br/>
-
+ -->
