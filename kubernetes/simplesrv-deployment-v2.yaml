@@ -15,23 +15,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: acloud-simple-service-v1
+  name: acloud-simple-service-v2
   labels:
     app: acloud-simple-service
-    version: "1.0"
+    version: "2.0"
     visualize: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: acloud-simple-service
-      version: "1.0"
+      version: "2.0"
       serving: "true"
   template:
     metadata:
       labels:
         app: acloud-simple-service
-        version: "1.0"
+        version: "2.0"
         serving: "true"
         visualize: "true"
       annotations:
@@ -41,17 +41,12 @@ spec:
       - name: acloud-simple-service
         image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-service:1.0
         env:
+        - name: spring.datasource.druid.base.username
+          value: root
+        - name: spring.datasource.druid.base.password
+          value: yourpassword
         - name: userServiceVersion
           value: "2.0"
-        livenessProbe:
-          initialDelaySeconds: 5
-          httpGet:
-            path: /actuator/health
-            port: 8080
-        readinessProbe:
-          httpGet:
-            path: /user
-            port: 8080
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 8601

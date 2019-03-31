@@ -40,9 +40,9 @@ spring:
         enabled: false
     #其中一个数据源，可以配置多个，对应多个config配置类
       base:
-        url: jdbc:mysql://mysql:3306/summerdb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull
-        username: summer
-        password: 123456
+        url: jdbc:mysql://mysql:3306/app?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: yourpassword
 
   redis:
     host: localhost

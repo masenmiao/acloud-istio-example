@@ -40,15 +40,11 @@ spec:
       containers:
       - name: acloud-simple-service
         image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-service:1.0
-        livenessProbe:
-          initialDelaySeconds: 5
-          httpGet:
-            path: /actuator/health
-            port: 8080
-        readinessProbe:
-          httpGet:
-            path: /user
-            port: 8080
+        env:
+        - name: spring.datasource.druid.base.username
+          value: root
+        - name: spring.datasource.druid.base.password
+          value: yourpassword
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 8601

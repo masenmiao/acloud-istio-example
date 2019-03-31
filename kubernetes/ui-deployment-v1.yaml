@@ -18,17 +18,25 @@ metadata:
   name: acloud-simple-ui-v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: acloud-simple-ui
+      version: "1.0"
+      serving: "true"
   template:
     metadata:
       labels:
         app: acloud-simple-ui
         version: "1.0"
+        serving: "true"
+        visualize: "true"
     spec:
       containers:
       - name: acloud-simple-ui
         image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-ui:1.0
         env:
         - name: simpleServiceName
-          value: acloud-simple-service
+          value: acloud-simple-service:8080
         ports:
-          containerPort: 8080
+        - name: http
+          containerPort: 8701

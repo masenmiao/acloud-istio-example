@@ -6,4 +6,4 @@ spring:
   application:
     name: acloud-simple-ui
 
-simpleServiceName: acloud-simple-service
+simpleServiceName: acloud-simple-service:8080

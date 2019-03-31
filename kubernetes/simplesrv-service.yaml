@@ -22,7 +22,7 @@ metadata:
 spec:
   ports:
     - port: 8080
-      targetPort: 8080
+      targetPort: 8601
       name: http
   selector:
     app: acloud-simple-service
