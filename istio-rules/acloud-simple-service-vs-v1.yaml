@@ -12,3 +12,4 @@ spec:
     route:
     - destination:
         host: acloud-simple-service
+        subset: v1
