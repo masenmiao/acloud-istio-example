@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 public class UserReactiveFeignController implements UserReactiveService{
 
     @Value("${simpleServiceName}")
-    private String simpleServiceName = "cloud-simple-service";
+    private String simpleServiceName = "acloud-simple-service:8080";
 
     UserReactiveService userReactiveService;
 
@@ -38,8 +38,9 @@ public class UserReactiveFeignController implements UserReactiveService{
             .builder().decoder(new JacksonDecoder()).target(UserReactiveService.class, "http://" + simpleServiceName);
     }
 
-    //问题：至返回了第一个元素，应该是接口声明少了类似MeidaType这样的属性
-    @RequestMapping(value = "/fluxFindAll",produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    //问题：3个元素只返回了第一个元素，应该是接口声明少了类似MeidaType这样的属性
+    //FEIGN 可能不支持flux
+    @RequestMapping(value = "/fluxFindAll", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     @Override public Flux<User> searchAll() {
 
         return userReactiveService.searchAll();
