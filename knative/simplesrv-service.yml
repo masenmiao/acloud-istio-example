@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: acloud-simple-service
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:          
+          container:
+            image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-service:1.0
+            env:
+            - name: spring.datasource.druid.base.username
+              value: root
+            - name: spring.datasource.druid.base.password
+              value: yourpassword
+            - name: userServiceVersion
+              value: "2.0"
+            ports:
+            - name: http
+              containerPort: 8601

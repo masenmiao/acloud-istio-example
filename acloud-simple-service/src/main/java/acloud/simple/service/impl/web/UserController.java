@@ -3,6 +3,7 @@ package acloud.simple.service.impl.web;
 import java.util.List;
 
 import acloud.simple.service.spe.UserReactiveService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -75,7 +76,12 @@ public class UserController {
 	public User findById(@RequestParam("id") String id){
 		System.out.println("message id is:"+id);
 		System.out.println("message dany is:"+message);
-		User user = userService.findById(id);
+		User user = null;
+		if(StringUtils.isEmpty(id)){
+			user = new User("1","user of default");
+		}else{
+			user = userService.findById(id);
+		}
 		System.out.println("user : "+ user);
 		return user;
 	}

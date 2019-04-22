@@ -29,6 +29,18 @@ public class UserController {
     @Value("${simpleServiceName}")
     private String simpleServiceName = "acloud-simple-service";
 
+    @RequestMapping(value = "/hello")
+    public String hello() {
+        return "hello knative";
+    }
+
+    @RequestMapping(value = "/user")
+    public User user() {
+        User user = restTemplate.getForObject("http://" +
+            simpleServiceName + "/findById?id={?}", User.class, "");
+        return user;
+    }
+
     /**
      * feign RPC方式调用方式，最佳实践
      */

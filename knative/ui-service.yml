@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: acloud-simple-ui
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:          
+          container:
+            image: registry.cn-shenzhen.aliyuncs.com/acloud/acloud-simple-ui:1.0
+            ports:
+            - name: http
+              containerPort: 8701
+            env:
+            - name: simpleServiceName
+              value: acloud-simple-service:8601
