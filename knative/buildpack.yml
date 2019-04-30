@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: knative-buildpack-demo
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      build:
+        serviceAccountName: build-bot
+          source:
+            git:
+              url: https://github.com/masenmiao/acloud-istio-example.git
+              revision: master
+          template:
+            name: buildpack
+            arguments:
+            - name: IMAGE
+              value: docker.io/gswk/knative-buildpack-demo:latest
+            - name: DIRECTORY
+              value: /workspace/acloud-simple-ui
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/gswk/acloud-istio-example/acloud-simple-ui:latest

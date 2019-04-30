@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dockerhub-account
+  annotations:
+    build.knative.dev/docker-0: https://index.docker.io/v1/
+type: kubernetes.io/basic-auth
+data:
+  # 'echo -n "username" | base64'
+  username: dXNlcm5hbWUK
+  # 'echo -n "password" | base64'
+  password: cGFzc3dvcmQK
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-bot
+secrets:
+- name: dockerhub-account
+---
